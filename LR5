@@ -1,0 +1,23 @@
+sudo nano /etc/systemd/system/repair-eth.service
+
+[Unit]
+Description=Repair Ethernet Service
+After=network.target
+
+[Service]
+ExecStart=/home/user/repair_eth.sh
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
+
+sudo cmhod 644 /etc/systemd/system/repair-eth.service
+sudo systemctl daemon-reload
+sudo sysmemctl enable repair_eth.sh
+sudo sysmemctl status repair_eth.sh
+
+chmod +x /home/user/repair_eth.sh
+sudo sysmemctl start repair_eth.sh
+sudo sysmemctl status repair_eth.sh
+
+sudo reboot
